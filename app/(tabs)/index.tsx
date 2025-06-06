@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, StatusBar, Alert } from 'react-native';
 
-// Passo 1: Importamos nossas constantes do novo arquivo!
 import { FOCUS_TIME_SECONDS, BREAK_TIME_SECONDS } from '../constants/times';
 
-// O nome do componente agora é 'PomodoroScreen' ou simplesmente 'Screen', o que for mais semântico.
-// 'export default' já torna ele a tela principal desta rota.
 export default function PomodoroScreen() {
-  // O resto da lógica permanece o mesmo...
   const [tempoRestante, setTempoRestante] = useState(FOCUS_TIME_SECONDS);
   const [estaAtivo, setEstaAtivo] = useState(false);
   const [ePeriodoFoco, setEPeriodoFoco] = useState(true);
 
   useEffect(() => {
-    let intervalo: NodeJS.Timeout | null = null; // Adicionando tipo para TypeScript
+    let intervalo: NodeJS.Timeout | null = null; 
 
     if (estaAtivo && tempoRestante > 0) {
       intervalo = setInterval(() => {
@@ -27,7 +23,7 @@ export default function PomodoroScreen() {
       setTempoRestante(novoPeriodoFoco ? FOCUS_TIME_SECONDS : BREAK_TIME_SECONDS);
     }
 
-    // A função de limpeza precisa saber o tipo de 'intervalo'
+  
     return () => {
       if (intervalo) {
         clearInterval(intervalo);
@@ -35,7 +31,7 @@ export default function PomodoroScreen() {
     };
   }, [estaAtivo, tempoRestante]);
 
-  const formatarTempo = (tempo: number) => { // Adicionando tipo para TypeScript
+  const formatarTempo = (tempo: number) => { 
     const minutos = Math.floor(tempo / 60);
     const segundos = tempo % 60;
     return `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
@@ -69,7 +65,7 @@ export default function PomodoroScreen() {
   );
 }
 
-// Os estilos continuam os mesmos
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
